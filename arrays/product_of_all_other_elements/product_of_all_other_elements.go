@@ -29,15 +29,45 @@ func ProductOfAllOtherElements(list []int) []int {
 	//* Product is used to store the product of all the terms
 	//* Looping through the list to replace each index with the product of all terms except itself
 
+	// product := 1
+
+	// for _, v := range list {
+	// 	product *= v
+	// }
+
+	// for i := 0; i < len(list); i++ {
+	// 	list[i] = product/list[i]
+	// }
+
+	// return list
+
+	//? Approach-3: time - O(n) | space - O(n)
+
+	//* Product is first used to store the products one by one, increasing left to right
+	//* Looping through the list to assign the product value to the result
+	//* Doing the same thing again going right to left
+
+	if len(list) <= 1 {
+		return []int{}
+	}
+
+	result := make([]int, len(list))
+
 	product := 1
 
-	for _, v := range list {
-		product *= v
-	}
-
+	// L -> R
 	for i := 0; i < len(list); i++ {
-		list[i] = product/list[i]
+		result[i] = product
+		product *= list[i]
 	}
 
-	return list
+	product = 1
+
+	// L <- R
+	for i := len(list)-1; i >= 0; i-- {
+		result[i] *= product
+		product *= list[i]
+	}
+
+	return result
 }

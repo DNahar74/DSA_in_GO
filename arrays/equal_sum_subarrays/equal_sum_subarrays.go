@@ -53,6 +53,7 @@ func EqualSubArrays(list []int) [][]int {
 				sum1 += list[start]
 				subArray1 = append(subArray1, list[start])
 			} else {
+				// Not just using break to handle edge case where middle element is 0 like in {1, 1, 1, 1, 0, 4}
 				start++
 				sum1 += list[start]
 				subArray1 = append(subArray1, list[start])
